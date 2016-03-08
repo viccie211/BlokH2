@@ -19,7 +19,7 @@ namespace ProjectBlokH.Controllers
 
         public UpdateController()
         {
-            db = new ApplicationUpdateRepository;
+            db = new ApplicationUpdateRepository();
         }
 
         public IHttpActionResult PutReservation(int id, Reservation reservation)
