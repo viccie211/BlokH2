@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace projectshizzleblokh.Models
+namespace ProjectBlokH.Models
 {
     public class Reservation
     {

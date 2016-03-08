@@ -5,9 +5,7 @@ using System.Web;
 
 namespace ProjectBlokH.Models
 {
-    public class Restaurant
+    public class ApplicationRepository 
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
     }
 }
