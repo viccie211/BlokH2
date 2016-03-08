@@ -5,7 +5,7 @@ using System.Web;
 
 namespace ProjectBlokH.Models
 {
-    public class ApplicationRepository 
+    public class ApplicationUpdateRepository 
     {
     }
 }
