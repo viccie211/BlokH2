@@ -20,13 +20,13 @@ namespace ProjectBlokH.Models
         Restaurant AddRestaurant(Restaurant restaurant);
         Restaurant GetRestaurant(int id);
 
-        bool UpdateReservation(Reservation reservation);
+        void UpdateReservation(Reservation reservation);
         void RemoveReservation(int id);
 
-        bool UpdateUser(User user);
+        void UpdateUser(User user);
         void RemoveUser(int id);
 
-        bool UpdateRestaurant(Restaurant restaurant);
+        void UpdateRestaurant(Restaurant restaurant);
         void RemoveRestaurant(int id);
     }
 }

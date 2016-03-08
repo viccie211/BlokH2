@@ -11,6 +11,11 @@ namespace ProjectBlokH.Models
         private List<Restaurant> restaurants = new List<Restaurant>();
         private List<User> users = new List<User>();
 
+        public ApplicationUpdateRepository()
+        {
+
+        }
+
         public Reservation AddReservation(Reservation reservation)
         {
             throw new NotImplementedException();
@@ -28,17 +33,17 @@ namespace ProjectBlokH.Models
 
         public IEnumerable<Reservation> GetAllReservations()
         {
-            throw new NotImplementedException();
+            return reservations;
         }
 
         public IEnumerable<Restaurant> GetAllRestaurants()
         {
-            throw new NotImplementedException();
+            return restaurants;
         }
 
         public IEnumerable<User> GetAllUsers()
         {
-            throw new NotImplementedException();
+            return users;
         }
 
         public Reservation GetReservation(int id)
@@ -71,24 +76,40 @@ namespace ProjectBlokH.Models
             throw new NotImplementedException();
         }
 
-        public bool UpdateReservation(Reservation reservation)
+        public void UpdateReservation(Reservation reservation)
         {
             if(reservation == null)
             {
                 throw new ArgumentNullException("reservation");
             }
 
-            int index = reservations.FindIndex(r => r.Id == reservation.)
+            Reservation oldReservation = reservations.FirstOrDefault(r => r.id == reservation.id);
+            oldReservation.Date = reservation.Date;
+            oldReservation.Restaurant = reservation.Restaurant;
+            oldReservation.User = reservation.User;
         }
 
-        public bool UpdateRestaurant(Restaurant restaurant)
+        public void UpdateRestaurant(Restaurant restaurant)
         {
-            throw new NotImplementedException();
+            if (restaurant == null)
+            {
+                throw new ArgumentNullException("restaurant");
+            }
+
+            Restaurant oldRestaurant = restaurants.FirstOrDefault(r => r.Id == restaurant.Id);
+            oldRestaurant.Name = restaurant.Name;
         }
 
-        public bool UpdateUser(User user)
+        public void UpdateUser(User user)
         {
-            throw new NotImplementedException();
+            if (user == null)
+            {
+                throw new ArgumentNullException("user");
+            }
+
+            User oldUser = users.FirstOrDefault(u => u.Id == user.Id);
+            oldUser.Name = user.Name;
+            oldUser.Password = user.Password;
         }
     }
 }
