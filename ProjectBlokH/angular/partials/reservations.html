@@ -1,5 +1,8 @@
-<div>
-    <ul>
-        <li ng-repeat="reservation in reservations">{{reservation.Restaurant.Name}}, datum en tijdstip:{{reservation.Date}}</li>
+<div class="col-xs-0 col-sm-4 col-md-4"></div>
+<div class="col-xs-12 col-sm-4 col-md-4">
+    Mijn reserveringen
+    <ul class="list-group">
+        <li class="list-group-item" ng-repeat="reservation in reservations">{{reservation.Restaurant.Name}}, op {{reservation.Date}} om {{reservation.Time}}</li>
     </ul>
-</div>
+    </div>
+<div class="col-xs-0 col-sm-4 col-md-4"></div>

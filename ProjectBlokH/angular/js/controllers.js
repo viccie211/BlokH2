@@ -42,6 +42,14 @@ reservationsControllers.controller('ReservationsCtrl', ['$scope', '$http','$loca
             }).then(function successCallback(response) {
                 if(response.data !=-1)
                 {
+                    for(var i= 0;i<response.data.length; i++)
+                    {
+                        Date=new Date(response.data[i].Date);
+                        var datestring=Date.toLocaleDateString();
+                        var time=Date.toLocaleTimeString();
+                        response.data[i].Date=datestring;
+                        response.data[i].Time=time;
+                    }
                     $scope.reservations=response.data;
                 }
             }, function errorCallback(response) {
