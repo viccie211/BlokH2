@@ -15,5 +15,7 @@ namespace ProjectBlokH.Controllers
             IApplicationRepository data = new ApplicationReadRepository();
             return data.GetAllReservations();
         }
+
+
     }
 }

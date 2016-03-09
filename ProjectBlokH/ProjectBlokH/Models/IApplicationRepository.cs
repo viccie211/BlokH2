@@ -8,14 +8,17 @@ namespace ProjectBlokH.Models
     public interface IApplicationRepository
     {
         IEnumerable<Reservation> GetAllReservations();
+        IEnumerable<Reservation> GetAllReservationsFromUser(int userId);
         IEnumerable<User> GetAllUsers();
         IEnumerable<Restaurant> GetAllRestaurants();
 
         Reservation GetReservation(int id);
+
         Reservation AddReservation(Reservation reservation);
 
         User AddUser(User user);
         User GetUser(int id);
+        int login(string username, string password);
 
         Restaurant AddRestaurant(Restaurant restaurant);
         Restaurant GetRestaurant(int id);
@@ -28,5 +31,6 @@ namespace ProjectBlokH.Models
 
         bool UpdateRestaurant(Restaurant restaurant);
         void RemoveRestaurant(int id);
+        
     }
 }

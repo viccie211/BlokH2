@@ -38,6 +38,39 @@ namespace ProjectBlokH.Models
 
                 reservations.Add(newItem);
             }
+            db.Close();
+        }
+        //Security is heel slecht, maar dat vinden we bij een proof of concept app voor school niet heel belangrijk. We weten dat je passwords niet zo in de database moet zetten
+        //En dat je zo alle users over internet stuurt, maar we wilden sowieso linq gebruiken dus vandaar.
+        public int login(string username, string password)
+        {
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandText = "SELECT * FROM [ProjectBlokH].[dbo].[users] u";
+            cmd.Connection = db;
+            SqlDataReader reader;
+
+            db.Open();
+            reader = cmd.ExecuteReader();
+            List<User>users = new List<User>();
+            while (reader.Read())
+            {
+                User newItem = new User();
+                newItem.Id = reader.GetInt32(0);
+                newItem.Name = reader.GetString(1);
+                newItem.Password = reader.GetString(2);
+
+                users.Add(newItem);
+            }
+            db.Close();
+            List<int> loggedInUsers = users.Where(user => user.Name.Equals(username)).Where(user => user.Password.Equals(password)).Select(user=>user.Id).ToList();
+            if(loggedInUsers.Count()>0)
+            {
+                return loggedInUsers[0];
+            }
+            else
+            {
+                return -1;
+            }
         }
 
         public Reservation AddReservation(Reservation reservation)
@@ -60,6 +93,11 @@ namespace ProjectBlokH.Models
             return reservations;
         }
 
+        public IEnumerable<Reservation> GetAllReservationsFromUser(int userId)
+        {
+            List<Reservation> selected = reservations.Where(reservation => reservation.User.Id == userId).ToList();
+            return selected;
+        }
         public IEnumerable<Restaurant> GetAllRestaurants()
         {
             throw new NotImplementedException();
