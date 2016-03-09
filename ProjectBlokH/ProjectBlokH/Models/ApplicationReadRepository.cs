@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Data.SqlClient;
+using System.Windows.Forms;
 
 namespace ProjectBlokH.Models
 {
@@ -40,8 +41,9 @@ namespace ProjectBlokH.Models
             }
             db.Close();
         }
-        //Security is heel slecht, maar dat vinden we bij een proof of concept app voor school niet heel belangrijk. We weten dat je passwords niet zo in de database moet zetten
-        //En dat je zo alle users over internet stuurt, maar we wilden sowieso linq gebruiken dus vandaar.
+        // Security is heel slecht, maar dat vinden we bij een proof of concept app voor school niet heel belangrijk. 
+        // We weten dat je passwords niet zo in de database moet zetten
+        // En dat je zo alle users over internet stuurt, maar we wilden sowieso linq gebruiken dus vandaar.
         public int login(string username, string password)
         {
             SqlCommand cmd = new SqlCommand();
@@ -75,7 +77,25 @@ namespace ProjectBlokH.Models
 
         public Reservation AddReservation(Reservation reservation)
         {
-            throw new NotImplementedException();
+            string sql = "INSERT INTO reservation(moment,userID,restaurant) VALUES(@param1,@param2,@param3)";
+
+            SqlCommand cmd = new SqlCommand(sql, db);
+            cmd.Parameters.AddWithValue("@param1", reservation.Date);
+            cmd.Parameters.AddWithValue("@param2", reservation.User.Id);
+            cmd.Parameters.AddWithValue("@param3", reservation.Restaurant.Id);
+
+            try
+            {
+                db.Open();
+                cmd.ExecuteNonQuery();
+            }
+
+            catch(SqlException e)
+            {
+                MessageBox.Show(e.Message.ToString(), "Error Message");
+            }
+
+            return reservation;
         }
 
         public Restaurant AddRestaurant(Restaurant restaurant)

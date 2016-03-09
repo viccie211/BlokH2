@@ -16,6 +16,10 @@ namespace ProjectBlokH.Controllers
             return data.GetAllReservations();
         }
 
-
+        public Reservation PostReservation(Reservation res)
+        {
+            IApplicationRepository data = new ApplicationReadRepository();
+            return data.AddReservation(res);
+        }
     }
 }
