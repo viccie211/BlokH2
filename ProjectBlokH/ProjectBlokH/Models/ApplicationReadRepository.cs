@@ -100,12 +100,45 @@ namespace ProjectBlokH.Models
 
         public Restaurant AddRestaurant(Restaurant restaurant)
         {
-            throw new NotImplementedException();
+            string sql = "INSERT INTO restaurant(name) VALUES(@param)";
+
+            SqlCommand cmd = new SqlCommand(sql, db);
+            cmd.Parameters.AddWithValue("@param", restaurant.Name);
+
+            try
+            {
+                db.Open();
+                cmd.ExecuteNonQuery();
+            }
+
+            catch (SqlException e)
+            {
+                MessageBox.Show(e.Message.ToString(), "Error Message");
+            }
+
+            return restaurant;
         }
 
         public User AddUser(User user)
         {
-            throw new NotImplementedException();
+            string sql = "INSERT INTO users(username,pass) VALUES(@param1,@param2)";
+
+            SqlCommand cmd = new SqlCommand(sql, db);
+            cmd.Parameters.AddWithValue("@param1", user.Name);
+            cmd.Parameters.AddWithValue("@param2", user.Password);
+
+            try
+            {
+                db.Open();
+                cmd.ExecuteNonQuery();
+            }
+
+            catch (SqlException e)
+            {
+                MessageBox.Show(e.Message.ToString(), "Error Message");
+            }
+
+            return user;
         }
 
         public IEnumerable<Reservation> GetAllReservations()
