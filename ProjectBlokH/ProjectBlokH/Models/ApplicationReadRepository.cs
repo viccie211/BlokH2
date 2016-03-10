@@ -8,8 +8,10 @@ namespace ProjectBlokH.Models
 {
     public class ApplicationReadRepository : IApplicationRepository
     {
-        SqlConnection db = new SqlConnection("Server= localhost; Database= ProjectBlokH; Integrated Security=True;");
+        SqlConnection db = new SqlConnection("Server= MITCHEL\\SERVERSCHOOLSQL; Database= ProjectBlokH; Integrated Security=True;");
         List<Reservation> reservations;
+        List<User> users;
+
         public ApplicationReadRepository()
         {
             SqlCommand cmd = new SqlCommand();
@@ -105,7 +107,26 @@ namespace ProjectBlokH.Models
 
         public IEnumerable<User> GetAllUsers()
         {
-            throw new NotImplementedException();
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandText = "SELECT * FROM [ProjectBlokH].[dbo].[users] u;";
+            cmd.Connection = db;
+            SqlDataReader reader;
+
+            db.Open();
+            reader = cmd.ExecuteReader();
+
+            while (reader.Read())
+            {
+                User newItem = new User();
+                newItem.Id = reader.GetInt32(0);
+                newItem.Name = reader.GetString(1);
+                newItem.Password = reader.GetString(2);
+
+                users.Add(newItem);
+            }
+            db.Close();
+
+            return users;
         }
 
         public Reservation GetReservation(int id)
@@ -120,7 +141,9 @@ namespace ProjectBlokH.Models
 
         public User GetUser(int id)
         {
-            throw new NotImplementedException();
+            User user = users.Find(y => y.Id == id);
+
+            return user;
         }
 
         public void RemoveReservation(int id)
