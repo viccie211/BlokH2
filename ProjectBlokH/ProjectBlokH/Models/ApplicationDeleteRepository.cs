@@ -31,7 +31,7 @@ namespace ProjectBlokH.Models
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Reservation> GetAllReservationsFromUser(int userId)
+        public IEnumerable<ReservationRestaurant> GetAllReservationsFromUser(int userId)
         {
             throw new NotImplementedException();
         }
