@@ -40,7 +40,6 @@ namespace ProjectBlokH.Models
             return reservations;
         }
 
-
         public IEnumerable<Restaurant> GetAllRestaurants()
         {
             return restaurants;
