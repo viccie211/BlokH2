@@ -117,19 +117,25 @@ reservationsControllers.controller('AddReservationsCtrl', ['$scope', '$http','$l
 			$http({
 				method: 'GET',
 				url: 'http://localhost:59499/api/Restaurant'
-			}).success(function (result) {
-			$scope.Restaurants = result;
+			}).then(function successCallback(response){
+				if(response.data !=-1){
+					$scope.Restaurants = response.data;
+				}else{
+					$location.path('/reservations');
+				}
+			},function errorCallback(response){
+
 			});
 			
 			$scope.date = {
 				value: new Date(2016, 2, 11, 19)
 			};
 			
-            $scope.addReservation = function (date) {
+            $scope.addReservation = function (date, restaurant) {
                 $http({
                     method: 'POST',
                     url: 'http://localhost:59499/api/Reservation',
-                    data: {"Id": -2, "Date": date, "RestaurantId": 0, "UserId": loginService.getLoggedIn()}
+                    data: {"Id": -2, "Date": date, "RestaurantId": restaurant, "UserId": loginService.getLoggedIn()}
                 }).then(function successCallback(response) {
                     if (response.data != -1) {
                         $location.path('/reservations');

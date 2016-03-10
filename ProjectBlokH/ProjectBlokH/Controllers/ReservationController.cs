@@ -6,7 +6,6 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Cors;
 using ProjectBlokH.Models;
-using System.Web.Http.Cors;
 
 namespace ProjectBlokH.Controllers
 {
