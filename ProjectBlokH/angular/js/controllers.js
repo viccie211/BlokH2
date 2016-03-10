@@ -31,8 +31,8 @@ reservationsControllers.controller('LoginCtrl', ['$scope', '$http','$location', 
     }
 ]);
 
-reservationsControllers.controller('ReservationsCtrl', ['$scope', '$http','$location', 'loginService',
-    function($scope,$http,$location,loginService) {
+reservationsControllers.controller('ReservationsCtrl', ['$scope', '$http','$location', 'loginService','editService',
+    function($scope,$http,$location,loginService, editService) {
         if(loginService.getLoggedIn()!=-1)
         {
             $scope.reservations=[];
@@ -59,6 +59,18 @@ reservationsControllers.controller('ReservationsCtrl', ['$scope', '$http','$loca
             $scope.reservations[0]={};
             $scope.reservations[0].Restaurant={};
             $scope.reservations[0].Restaurant.Name="Loading";
+
+            $scope.goEdit = function(path, name, id, moment){
+
+            var restaurantName = name;
+            var restaurantMoment = moment;
+            var restaurantId = id;
+
+            editService.setRestaurant(restaurantName, restaurantId, restaurantMoment);
+
+            $location.path(path);
+
+          };
         }
         else
         {
@@ -66,3 +78,23 @@ reservationsControllers.controller('ReservationsCtrl', ['$scope', '$http','$loca
         }
     }
     ]);
+
+reservationsControllers.controller('EditCtrl', ['$scope', '$http', '$location','loginService', 'editService',
+  function($scope, $http, $location, loginService, editService){
+      $http({
+        method: 'GET',
+        url: 'http://localhost:59499/api/users/'+loginService.getLoggedIn()+"/reservations/edit"
+      }).then(function successCallback(response){
+        if(response.data !=-1){
+
+        }else{
+          $location.path('/reservations');
+        }
+      },function errorCallback(response){
+
+      });
+      $scope.restaurantId = editService.getRestaurantId();
+      $scope.restaurantName = editService.getRestaurantName();
+      $scope.restaurantMoment = editService.getRestaurantMoment();
+
+  }]);

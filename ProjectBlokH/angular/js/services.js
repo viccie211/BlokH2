@@ -1,6 +1,3 @@
-/**
- * Created by Victor on 9-3-2016.
- */
 var reservationServices = angular.module('reservationServices', []);
     reservationServices.service('loginService', function() {
         var userid=-1;
@@ -17,3 +14,27 @@ var reservationServices = angular.module('reservationServices', []);
         }
 
     });
+
+    reservationServices.service('editService', function(){
+      var restaurantName = " ";
+      var restaurantId = " ";
+      var restaurantMoment = " ";
+
+      this.setRestaurant = function(name, id, moment){
+        restaurantName = name;
+        restaurantId = id;
+        restaurantMoment = moment;
+      }
+
+      this.getRestaurantName = function(){
+        return restaurantName;
+      }
+
+      this.getRestaurantMoment = function(){
+        return restaurantMoment;
+      }
+
+      this.getRestaurantId = function(){
+        return restaurantId;
+      }
+    })

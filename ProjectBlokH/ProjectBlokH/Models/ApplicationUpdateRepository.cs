@@ -121,20 +121,5 @@ namespace ProjectBlokH.Models
             oldUser.Name = user.Name;
             oldUser.Password = user.Password;
         }
-
-        bool IApplicationRepository.UpdateReservation(Reservation reservation)
-        {
-            throw new NotImplementedException();
-        }
-
-        bool IApplicationRepository.UpdateRestaurant(Restaurant restaurant)
-        {
-            throw new NotImplementedException();
-        }
-
-        bool IApplicationRepository.UpdateUser(User user)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

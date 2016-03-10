@@ -5,13 +5,15 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using ProjectBlokH.Models;
+using System.Web.Http.Cors;
 
 namespace ProjectBlokH.Controllers
 {
+    [EnableCors(origins: "http://localhost:8000", headers: "*", methods: "*")]
     public class UpdateController : ApiController
     {
         IApplicationRepository db;
-
+         
         public UpdateController(IApplicationRepository db)
         {
             this.db = db;
@@ -22,17 +24,13 @@ namespace ProjectBlokH.Controllers
             db = new ApplicationUpdateRepository();
         }
 
-        public IHttpActionResult PutReservation(int id, Reservation reservation)
+        [HttpPost]
+        [Route("api/users/reservations/edit")]
+        public IEnumerable<Restaurant> PutReservation([FromBody] Reservation reservation)
         {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
-
-            if (id != reservation.id)
-                return BadRequest();
-
             db.UpdateReservation(reservation);
 
-            return StatusCode(HttpStatusCode.NoContent);
+            return db.GetAllRestaurants();
         }
 
         public IHttpActionResult PutUser(int id, User user)
@@ -48,7 +46,7 @@ namespace ProjectBlokH.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        public IHttpActionResult PutProduct(int id, Restaurant restaurant)
+        public IHttpActionResult PutRestaurant(int id, Restaurant restaurant)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
