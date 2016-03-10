@@ -41,11 +41,11 @@ reservationsControllers.controller('ReservationsCtrl', ['$scope', '$http', '$loc
             }).then(function successCallback(response) {
                 if (response.data != -1) {
                     for (var i = 0; i < response.data.length; i++) {
-                        Date = new Date(response.data[i].Date);
+                        Date = new Date(response.data[i].reserv.Date);
                         var datestring = Date.toLocaleDateString();
                         var time = Date.toLocaleTimeString();
-                        response.data[i].Date = datestring;
-                        response.data[i].Time = time;
+                        response.data[i].reserv.Date = datestring;
+                        response.data[i].reserv.Time = time;
                     }
                     $scope.reservations = response.data;
                 }
@@ -53,13 +53,10 @@ reservationsControllers.controller('ReservationsCtrl', ['$scope', '$http', '$loc
                 // called asynchronously if an error occurs
                 // or server returns response with an error status.
             });
-            $scope.reservations[0] = {};
-            $scope.reservations[0].Restaurant = {};
-            $scope.reservations[0].Restaurant.Name = "Loading";
             $scope.Delete = function (Id) {
                 $http({
                     method: 'DELETE',
-                    url: 'http://localhost:59499/api/reservation/'+Id,
+                    url: 'http://localhost:59499/api/reservation/' + Id,
                 }).then(function successCallback(response) {
                     var i = 1;
                 }, function errorCallback(response) {
@@ -68,6 +65,9 @@ reservationsControllers.controller('ReservationsCtrl', ['$scope', '$http', '$loc
                 });;
                 $scope.userId = "Loading";
             }
+            $scope.reservations[0] = {};
+            $scope.reservations[0].restaurant = {};
+            $scope.reservations[0].restaurant.Name = "Loading";
         }
         else {
             $location.path('/login');

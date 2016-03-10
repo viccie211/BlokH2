@@ -8,7 +8,7 @@ namespace ProjectBlokH.Models
     public interface IApplicationRepository
     {
         IEnumerable<Reservation> GetAllReservations();
-        IEnumerable<Reservation> GetAllReservationsFromUser(int userId);
+        IEnumerable<ReservationRestaurant> GetAllReservationsFromUser(int userId);
         IEnumerable<User> GetAllUsers();
         IEnumerable<Restaurant> GetAllRestaurants();
 

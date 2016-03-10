@@ -14,7 +14,7 @@ namespace ProjectBlokH.Controllers
     {
 
         [Route("api/users/{userId}/reservations")]
-        public IEnumerable<Reservation> getReservations(int userId)
+        public IEnumerable<ReservationRestaurant> getReservations(int userId)
         {
             IApplicationRepository data = new ApplicationReadRepository();
             return data.GetAllReservationsFromUser(userId);
