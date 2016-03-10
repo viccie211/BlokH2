@@ -99,9 +99,12 @@ namespace ProjectBlokH.Models
             oldReservation.Date = reservation.Date;
             oldReservation.RestaurantId = reservation.RestaurantId;
             oldReservation.UserId = reservation.UserId;
+<<<<<<< HEAD
 
             update(oldReservation);
-
+          
+=======
+>>>>>>> dbaa59d46096ea32a6480da9b8c32012c9d4e8aa
         }
 
         public void UpdateRestaurant(Restaurant restaurant)

@@ -19,5 +19,11 @@ namespace ProjectBlokH.Controllers
             IApplicationRepository data = new ApplicationReadRepository();
             return data.GetAllReservationsFromUser(userId);
         }
+
+        public void DeleteUser(int id)
+        {
+            IApplicationRepository data = new ApplicationDeleteRepository();
+            data.RemoveUser(id);
+        }
     }
 }
