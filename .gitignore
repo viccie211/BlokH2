@@ -44,3 +44,5 @@ ProjectBlokH/ProjectBlokH/obj/Debug/ProjectBlokH.csproj.FileListAbsolute.txt
 ProjectBlokH/ProjectBlokH/obj/Debug/ProjectBlokH.csprojResolveAssemblyReference.cache
 ProjectBlokH/ProjectBlokH/obj/Debug/ProjectBlokH.dll
 ProjectBlokH/ProjectBlokH/obj/Debug/ProjectBlokH.pdb
+ProjectBlokH/.vs/*
+ProjectBlokH/ProjectBlokH/bower_components/*
