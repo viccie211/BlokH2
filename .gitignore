@@ -44,5 +44,9 @@ ProjectBlokH/ProjectBlokH/obj/Debug/ProjectBlokH.csproj.FileListAbsolute.txt
 ProjectBlokH/ProjectBlokH/obj/Debug/ProjectBlokH.csprojResolveAssemblyReference.cache
 ProjectBlokH/ProjectBlokH/obj/Debug/ProjectBlokH.dll
 ProjectBlokH/ProjectBlokH/obj/Debug/ProjectBlokH.pdb
-ProjectBlokH/.vs/*
-ProjectBlokH/ProjectBlokH/bower_components/*
+ProjectBlokH/.vs/ProjectBlokH/v14/.suo
+ProjectBlokH/angular/js/controllers.js.orig
+ProjectBlokH/angular/partials/reservations.html.orig
+ProjectBlokH/.vs/config/applicationhost.config
+ProjectBlokH/ProjectBlokH/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
+.gitignore.orig
