@@ -23,6 +23,10 @@ reservationsApp.config(['$routeProvider',
                 templateUrl: 'partials/updateReservation.html',
                 controller: 'EditCtrl'
             }).
+            when('/weather', {
+              templateUrl: 'partials/weather.html',
+              controller: 'WeatherCtrl'
+            }).
 			otherwise({
                 redirectTo: '/login'
             });

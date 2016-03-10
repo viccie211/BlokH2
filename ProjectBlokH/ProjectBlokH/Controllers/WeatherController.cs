@@ -12,8 +12,8 @@ namespace ProjectBlokH.Controllers
     public class WeatherController : ApiController
     {
         [HttpGet]
-        [Route("api/Login")]
-        public string getWeather()
+        [Route("api/users/reservations/weather")]
+        public string getWeather(int userid)
         {
             weather.ndfdXML myweather = new weather.ndfdXML();
 

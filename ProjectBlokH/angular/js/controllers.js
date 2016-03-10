@@ -28,20 +28,6 @@ reservationsControllers.controller('LoginCtrl', ['$scope', '$http', '$location',
         else {
             $location.path('/reservations');
         }
-
-        $http({
-            method: 'GET',
-            url: 'http://localhost:59499/api/Login/',
-        }).then(function successCallback(response) {
-            if(response.data !=-1)
-            {
-                $scope.weather = response.data;
-            }
-        }, function errorCallback(response) {
-            // called asynchronously if an error occurs
-            // or server returns response with an error status.
-            // or server returns response with an error status.
-        });
     }
 ]);
 
@@ -118,12 +104,39 @@ reservationsControllers.controller('ReservationsCtrl', ['$scope', '$http','$loca
             $location.path(path);
 
           };
+
+          $scope.goWeather = function(path){
+            $location.path(path);
+
+          };
         }
         else {
             $location.path('/login');
         }
     }
     ]);
+
+    reservationsControllers.controller('WeatherCtrl', ['$scope', '$http', '$location', 'loginService',
+    function($scope, $http, $location, loginService){
+      if(loginService.getLoggedIn()!=-1)
+      {
+      $http({
+          method: 'GET',
+          url: 'http://localhost:59499/api/users/reservations/weather',
+      }).then(function successCallback(response) {
+          if(response.data !=-1)
+          {
+               $scope.weather=response.data;
+          }
+      }, function errorCallback(response) {
+          // called asynchronously if an error occurs
+          // or server returns response with an error status.
+          // or server returns response with an error status.
+      });
+    }else{
+      $location.path('/login')
+    }
+    }]);
 
 reservationsControllers.controller('EditCtrl', ['$scope', '$http', '$location','loginService', 'editService',
   function($scope, $http, $location, loginService, editService){
