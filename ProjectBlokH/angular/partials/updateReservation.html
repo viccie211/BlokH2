@@ -2,8 +2,7 @@
   <div class="col-xs-12 col-sm-4 col-md-4">
     <h2>Wijzig reservering</h2>
     <h4>Restaurant naam </h4>
-    <select>
-      <option ng-repeat="item in restaurants">{{item.Name}}</option>
+    <select ng-model="restaurant" ng-options="item.Id as item.Name for item in restaurants">
     </select>
     <h4>Restaurant datum en tijd</h4>
     <input ng-model="restaurantDate"/>

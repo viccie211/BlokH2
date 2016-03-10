@@ -63,29 +63,23 @@ reservationsControllers.controller('ReservationsCtrl', ['$scope', '$http','$loca
                     method: 'POST',
                     url: 'http://localhost:59499/api/reservation/'+Id,
                 }).then(function successCallback(response) {
-                    $scope.reservations = [];
-                    $http({
-                        method: 'GET',
-                        url: 'http://localhost:59499/api/users/' + loginService.getLoggedIn() + "/reservations",
-                    }).then(function successCallback(response) {
-                        if (response.data != -1) {
-                            for (var i = 0; i < response.data.length; i++) {
-                                Date = new Date(response.data[i].reserv.Date);
-                                var datestring = Date.toLocaleDateString();
-                                var time = Date.toLocaleTimeString();
-                                response.data[i].reserv.Date = datestring;
-                                response.data[i].reserv.Time = time;
-                            }
-                            $scope.reservations = response.data;
-                        }
-                    }, function errorCallback(response) {
-                        // called asynchronously if an error occurs
-                        // or server returns response with an error status.
-                    });
+                  if(response.data !=-1)
+                  {
+                      for(var i= 0;i<response.data.length; i++)
+                      {
+                           var date= new Date(response.data[i].reserv.Date);
+                           response.data[i].reserv.Full = response.data[i].reserv.Date;
+
+                           var datestring=date.toLocaleDateString();
+                           var time=date.toLocaleTimeString();
+                           response.data[i].reserv.Date=datestring;
+                           response.data[i].reserv.Time=time;
+                       }
+                  }
                 }, function errorCallback(response) {
                     // called asynchronously if an error occurs
                     // or server returns response with an error status.
-                    
+
                 });;
                 $scope.userId = "Loading";
             }
@@ -135,7 +129,7 @@ reservationsControllers.controller('EditCtrl', ['$scope', '$http', '$location','
           $http({
               method: 'POST',
               url: 'http://localhost:59499/api/users/reservations/edit',
-              data: {"id": editService.getRestaurantId(), "Date": date, "RestaurantId": 1, "userId": loginService.getLoggedIn()}
+              data: {"id": editService.getRestaurantId(), "Date": date, "RestaurantId": $scope.restaurant, "userId": loginService.getLoggedIn()}
           }).then(function successCallback(response) {
               if (response.data != -1) {
                   $location.path('/reservations');
@@ -151,4 +145,3 @@ reservationsControllers.controller('EditCtrl', ['$scope', '$http', '$location','
         $location.path('/login');
     }
   }]);
-]);

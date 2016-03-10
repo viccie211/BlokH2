@@ -4,6 +4,7 @@
     <ul class="list-group">
        <li class="list-group-item" ng-repeat="reservation in reservations">{{reservation.rest.Name}}, op {{reservation.reserv.Date}} om {{reservation.reserv.Time}}
           <button ng-click="goEdit('/edit',reservation.rest.Name, reservation.reserv.id, reservation.reserv.Full)">Wijzig reservering</button>
+          <button ng-click="Delete(reservation.reserv.id)" value="Delete" class="btn btn-primary">Delete</button>
         </li>
     </ul>
     </div>

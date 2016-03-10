@@ -11,8 +11,10 @@ namespace ProjectBlokH.Models
         List<Reservation> reservations;
         List<User> users;
         List<Restaurant> restaurants;
+
         public ApplicationReadRepository()
         {
+            SqlConnection db = new SqlConnection("Server= MITCHEL\\SERVERSCHOOLSQL; Database= ProjectBlokH; Integrated Security=True;");
             //get the reservations
             SqlCommand cmd = new SqlCommand();
             cmd.CommandText = "SELECT * FROM [ProjectBlokH].[dbo].[reservation]";
@@ -114,6 +116,7 @@ namespace ProjectBlokH.Models
 
         public IEnumerable<User> GetAllUsers()
         {
+            SqlConnection db = new SqlConnection("Server= MITCHEL\\SERVERSCHOOLSQL; Database= ProjectBlokH; Integrated Security=True;");
             SqlCommand cmd = new SqlCommand();
             cmd.CommandText = "SELECT * FROM [ProjectBlokH].[dbo].[users] u;";
             cmd.Connection = db;
