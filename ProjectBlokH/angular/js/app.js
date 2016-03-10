@@ -1,6 +1,6 @@
 ﻿'use strict';
  		 
-/* App Module */		 /* App Module */
+/* App Module */
 
 var reservationsApp = angular.module('reservationsApp', [
   'ngRoute',
