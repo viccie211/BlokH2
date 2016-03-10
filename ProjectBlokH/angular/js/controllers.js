@@ -28,6 +28,20 @@ reservationsControllers.controller('LoginCtrl', ['$scope', '$http', '$location',
         else {
             $location.path('/reservations');
         }
+
+        $http({
+            method: 'GET',
+            url: 'http://localhost:59499/api/Login/',
+        }).then(function successCallback(response) {
+            if(response.data !=-1)
+            {
+                $scope.weather = response.data;
+            }
+        }, function errorCallback(response) {
+            // called asynchronously if an error occurs
+            // or server returns response with an error status.
+            // or server returns response with an error status.
+        });
     }
 ]);
 
