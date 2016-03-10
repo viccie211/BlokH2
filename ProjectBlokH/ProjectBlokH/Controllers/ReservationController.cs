@@ -18,11 +18,14 @@ namespace ProjectBlokH.Controllers
             return data.GetAllReservations();
         }
 
-        [HttpPost]
-        public void DeleteReservation([FromBody] int id)
+        
+        //[Route("api/reservations/{ReservationId}")]
+        [HttpDelete]
+        public bool DeleteReservation(int ReservationId)
         {
             IApplicationRepository data = new ApplicationDeleteRepository();
-            data.RemoveReservation(id);
+            data.RemoveReservation(ReservationId);
+            return true;
         }
 
     }

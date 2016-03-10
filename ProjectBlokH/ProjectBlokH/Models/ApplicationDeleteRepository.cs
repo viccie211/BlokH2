@@ -9,7 +9,7 @@ namespace ProjectBlokH.Models
     public class ApplicationDeleteRepository
         : IApplicationRepository
     {
-        SqlConnection db = new SqlConnection("Server= MITCHEL\\SERVERSCHOOLSQL; Database= ProjectBlokH; Integrated Security=True;");
+        SqlConnection db = new SqlConnection("Server= DESKTOP-SKEMNB8\\SQLEXPRESS; Database= ProjectBlokH; Integrated Security=True;");
 
         public Reservation AddReservation(Reservation reservation)
         {

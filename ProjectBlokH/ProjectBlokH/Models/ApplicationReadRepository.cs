@@ -8,7 +8,7 @@ namespace ProjectBlokH.Models
 {
     public class ApplicationReadRepository : IApplicationRepository
     {
-        SqlConnection db = new SqlConnection("Server= MITCHEL\\SERVERSCHOOLSQL; Database= ProjectBlokH; Integrated Security=True;");
+        SqlConnection db = new SqlConnection("Server= DESKTOP-SKEMNB8\\SQLEXPRESS; Database= ProjectBlokH; Integrated Security=True;");
         List<Reservation> reservations;
         List<User> users;
 
