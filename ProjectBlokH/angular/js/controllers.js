@@ -57,7 +57,12 @@ reservationsControllers.controller('ReservationsCtrl', ['$scope', '$http','$loca
             }, function errorCallback(response) {
                 // called asynchronously if an error occurs
                 // or server returns response with an error status.
+                // or server returns response with an error status.
             });
+            $scope.reservations[0]={};
+            $scope.reservations[0].rest={};
+            $scope.reservations[0].rest.Name="Loading";
+
             $scope.Delete = function (Id) {
                 $http({
                     method: 'POST',

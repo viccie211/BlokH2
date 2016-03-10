@@ -18,6 +18,10 @@ namespace ProjectBlokH.Models
             reservations = db.GetAllReservations();
         }
 
+        public IEnumerable<ReservationRestaurant> GetAllReservationsFromUser(int userId)
+        {
+            throw new NotImplementedException();
+        }
         public Reservation AddReservation(Reservation reservation)
         {
             throw new NotImplementedException();
@@ -36,11 +40,6 @@ namespace ProjectBlokH.Models
         public IEnumerable<Reservation> GetAllReservations()
         {
             return reservations;
-        }
-
-        public IEnumerable<ReservationRestaurant> GetAllReservationsFromUser(int userId)
-        {
-            throw new NotImplementedException();
         }
 
         public IEnumerable<Restaurant> GetAllRestaurants()
