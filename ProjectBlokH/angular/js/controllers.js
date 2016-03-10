@@ -44,10 +44,10 @@ reservationsControllers.controller('ReservationsCtrl', ['$scope', '$http','$loca
                 {
                     for(var i= 0;i<response.data.length; i++)
                     {
-                        Date=new Date(response.data[i].reserv.Date);
-                        var datestring=Date.toLocaleDateString();
-                        var time=Date.toLocaleTimeString();
-                        response.data[i].reserv.Date=datestring;
+                        var datetemp =new Date(response.data[i].reserv.Date);
+                        var datestring=datetemp.toLocaleDateString();
+                        var time=datetemp.toLocaleTimeString();
+                        response.data[i].reserv.DateShow=datestring;
                         response.data[i].reserv.Time=time;
                     }
                     $scope.reservations=response.data;
@@ -55,10 +55,11 @@ reservationsControllers.controller('ReservationsCtrl', ['$scope', '$http','$loca
             }, function errorCallback(response) {
                 // called asynchronously if an error occurs
                 // or server returns response with an error status.
+                // or server returns response with an error status.
             });
             $scope.reservations[0]={};
-            $scope.reservations[0].restaurant={};
-            $scope.reservations[0].restaurant.Name="Loading";
+            $scope.reservations[0].rest={};
+            $scope.reservations[0].rest.Name="Loading";
         }
         else
         {
