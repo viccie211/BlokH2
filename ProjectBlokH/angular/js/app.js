@@ -1,5 +1,4 @@
-﻿'use strict';
- 		 
+﻿ 
 /* App Module */
 
 var reservationsApp = angular.module('reservationsApp', [
@@ -22,6 +21,14 @@ reservationsApp.config(['$routeProvider',
 			when('/addreservation', {
                 templateUrl: 'partials/addReservation.html',
                 controller: 'AddReservationsCtrl'
+			}).
+            when('/edit', {
+                templateUrl: 'partials/updateReservation.html',
+                controller: 'EditCtrl'
+            }).
+            when('/weather', {
+              templateUrl: 'partials/weather.html',
+              controller: 'WeatherCtrl'
             }).
 			otherwise({
                 redirectTo: '/login'
