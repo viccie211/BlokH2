@@ -4,10 +4,12 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using ProjectBlokH.Models;
 
 namespace ProjectBlokH.Controllers
 {
+    [EnableCors(origins: "http://localhost:8000", headers: "*", methods: "*")]
     public class ReservationController : ApiController
     {
         public IEnumerable<Reservation> getReservations()
@@ -16,10 +18,11 @@ namespace ProjectBlokH.Controllers
             return data.GetAllReservations();
         }
 
-        public Reservation PostReservation(Reservation res)
+        [HttpPost]
+        public int PostReservation([FromBody] Reservation res)
         {
-            IApplicationRepository data = new ApplicationReadRepository();
-            return data.AddReservation(res);
+            IApplicationRepository repo = new ApplicationReadRepository();
+            return repo.AddReservation(res);
         }
     }
 }

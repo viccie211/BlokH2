@@ -9,7 +9,7 @@ namespace ProjectBlokH.Models
 {
     public class ApplicationReadRepository : IApplicationRepository
     {
-        SqlConnection db = new SqlConnection("Server= localhost; Database= ProjectBlokH; Integrated Security=True;");
+        SqlConnection db = new SqlConnection("Server=KOEN1\\SQLEXPRESS; Database=ProjectBlokH; Integrated Security=True;");
         List<Reservation> reservations;
         public ApplicationReadRepository()
         {
@@ -70,12 +70,12 @@ namespace ProjectBlokH.Models
                 return loggedInUsers[0];
             }
             else
-            {
+            { 
                 return -1;
             }
         }
 
-        public Reservation AddReservation(Reservation reservation)
+        public int AddReservation(Reservation reservation)
         {
             string sql = "INSERT INTO reservation(moment,userID,restaurant) VALUES(@param1,@param2,@param3)";
 
@@ -88,14 +88,14 @@ namespace ProjectBlokH.Models
             {
                 db.Open();
                 cmd.ExecuteNonQuery();
+                return 0;
             }
 
             catch(SqlException e)
             {
                 MessageBox.Show(e.Message.ToString(), "Error Message");
+                return -1;
             }
-
-            return reservation;
         }
 
         public Restaurant AddRestaurant(Restaurant restaurant)

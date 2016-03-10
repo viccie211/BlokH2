@@ -4,5 +4,6 @@
     <ul class="list-group">
         <li class="list-group-item" ng-repeat="reservation in reservations">{{reservation.Restaurant.Name}}, op {{reservation.Date}} om {{reservation.Time}}</li>
     </ul>
-    </div>
+	<button ng-click="createReservation()" value="CreateReservation" class="btn btn-primary">+ Voeg toe</button>
+</div>
 <div class="col-xs-0 col-sm-4 col-md-4"></div>

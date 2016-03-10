@@ -19,6 +19,10 @@ reservationsApp.config(['$routeProvider',
                 templateUrl: 'partials/reservations.html',
                 controller: 'ReservationsCtrl'
             }).
+			when('/addreservation', {
+                templateUrl: 'partials/addReservation.html',
+                controller: 'AddReservationsCtrl'
+            }).
 			otherwise({
                 redirectTo: '/login'
             });

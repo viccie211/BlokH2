@@ -59,6 +59,46 @@ reservationsControllers.controller('ReservationsCtrl', ['$scope', '$http','$loca
             $scope.reservations[0]={};
             $scope.reservations[0].Restaurant={};
             $scope.reservations[0].Restaurant.Name="Loading";
+			
+			$scope.createReservation = function() {
+				$location.path('/addreservation');
+			}
+        }
+        else
+        {
+            $location.path('/login');
+        }
+    }
+    ]);
+	
+reservationsControllers.controller('AddReservationsCtrl', ['$scope', '$http','$location', 'loginService',
+    function($scope,$http,$location,loginService) {
+        if(loginService.getLoggedIn()!=-1)
+        {
+            $scope.reservations=[];
+            $http({
+                method: 'GET',
+                url: 'http://localhost:59499/api/users/'+loginService.getLoggedIn()+"/addreservation",
+            }).then(function successCallback(response) {
+                if(response.data !=-1)
+                {
+                    for(var i= 0;i<response.data.length; i++)
+                    {
+                        Date=new Date(response.data[i].Date);
+                        var datestring=Date.toLocaleDateString();
+                        var time=Date.toLocaleTimeString();
+                        response.data[i].Date=datestring;
+                        response.data[i].Time=time;
+                    }
+                    $scope.reservations=response.data;
+                }
+            }, function errorCallback(response) {
+                // called asynchronously if an error occurs
+                // or server returns response with an error status.
+            });
+            $scope.reservations[0]={};
+            $scope.reservations[0].Restaurant={};
+            $scope.reservations[0].Restaurant.Name="Loading";
         }
         else
         {

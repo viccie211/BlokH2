@@ -14,7 +14,7 @@ namespace ProjectBlokH.Models
 
         Reservation GetReservation(int id);
 
-        Reservation AddReservation(Reservation reservation);
+        int AddReservation(Reservation reservation);
 
         User AddUser(User user);
         User GetUser(int id);
