@@ -16,6 +16,11 @@ namespace ProjectBlokH.Controllers
             return data.GetAllReservations();
         }
 
+        public void DeleteReservation(int id)
+        {
+            IApplicationRepository data = new ApplicationDeleteRepository();
+            data.RemoveReservation(id);
+        }
 
     }
 }
