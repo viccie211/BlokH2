@@ -44,31 +44,32 @@ reservationsControllers.controller('ReservationsCtrl', ['$scope', '$http','$loca
                 {
                     for(var i= 0;i<response.data.length; i++)
                     {
-                        Date=new Date(response.data[i].Date);
-                        var datestring=Date.toLocaleDateString();
-                        var time=Date.toLocaleTimeString();
-                        response.data[i].Date=datestring;
-                        response.data[i].Time=time;
-                    }
-                    $scope.reservations=response.data;
+                         var date= new Date(response.data[i].reserv.Date);
+                         response.data[i].reserv.Full = response.data[i].reserv.Date;
+
+                         var datestring=date.toLocaleDateString();
+                         var time=date.toLocaleTimeString();
+                         response.data[i].reserv.Date=datestring;
+                         response.data[i].reserv.Time=time;
+                     }
+                     $scope.reservations=response.data;
                 }
             }, function errorCallback(response) {
                 // called asynchronously if an error occurs
                 // or server returns response with an error status.
             });
             $scope.reservations[0]={};
-            $scope.reservations[0].Restaurant={};            $scope.reservations[0].Restaurant.Name="Loading";            $scope.reservations[0].Restaurant={};
-            $scope.reservations[0].Restaurant.Name="Loading";
             $scope.reservations[0].restaurant={};
             $scope.reservations[0].restaurant.Name="Loading";
 
-            $scope.goEdit = function(path, name, id, moment){
+
+            $scope.goEdit = function(path, name, id, date, time){
 
             var restaurantName = name;
-            var restaurantMoment = moment;
+            var date = date;
             var restaurantId = id;
 
-            editService.setRestaurant(restaurantName, restaurantId, restaurantMoment);
+            editService.setRestaurant(restaurantName, restaurantId, date);
 
             $location.path(path);
 
@@ -80,24 +81,43 @@ reservationsControllers.controller('ReservationsCtrl', ['$scope', '$http','$loca
         }
     }
     ]);
-    ]);    ]);
 
 reservationsControllers.controller('EditCtrl', ['$scope', '$http', '$location','loginService', 'editService',
   function($scope, $http, $location, loginService, editService){
+    if(loginService.getLoggedIn()!=-1)
+    {
       $http({
         method: 'GET',
-        url: 'http://localhost:59499/api/users/'+loginService.getLoggedIn()+"/reservations/edit"
+        url: 'http://localhost:59499/api/users/reservations/edit'
       }).then(function successCallback(response){
         if(response.data !=-1){
-
+            $scope.restaurants = response.data;
         }else{
           $location.path('/reservations');
         }
       },function errorCallback(response){
 
       });
-      $scope.restaurantId = editService.getRestaurantId();
-      $scope.restaurantName = editService.getRestaurantName();
-      $scope.restaurantMoment = editService.getRestaurantMoment();
 
+
+      $scope.edit = function () {
+        var date = $scope.restaurantDate;
+          $http({
+              method: 'POST',
+              url: 'http://localhost:59499/api/users/reservations/edit',
+              data: {"id": editService.getRestaurantId(), "Date": date, "RestaurantId": 1, "userId": loginService.getLoggedIn()}
+          }).then(function successCallback(response) {
+              if (response.data != -1) {
+                  $location.path('/reservations');
+              }
+          }, function errorCallback(response) {
+              // called asynchronously if an error occurs
+              // or server returns response with an error status.
+          });
+          $scope.userId = "Loading";
+      }
+      $scope.restaurantDate = editService.getRestaurantDate();
+    }else{
+        $location.path('/login');
+    }
   }]);

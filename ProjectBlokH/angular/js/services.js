@@ -17,24 +17,24 @@ var reservationServices = angular.module('reservationServices', []);
 
     reservationServices.service('editService', function(){
       var restaurantName = " ";
-      var restaurantId = " ";
-      var restaurantMoment = " ";
+      var reserveringId = " ";
+      var restaurantDate = " ";
 
-      this.setRestaurant = function(name, id, moment){
+      this.setRestaurant = function(name, id, date){
         restaurantName = name;
-        restaurantId = id;
-        restaurantMoment = moment;
+        reserveringId = id;
+        restaurantDate = date;
       }
 
       this.getRestaurantName = function(){
         return restaurantName;
       }
 
-      this.getRestaurantMoment = function(){
-        return restaurantMoment;
+      this.getRestaurantDate = function(){
+        return restaurantDate;
       }
 
       this.getRestaurantId = function(){
-        return restaurantId;
+        return reserveringId;
       }
     })

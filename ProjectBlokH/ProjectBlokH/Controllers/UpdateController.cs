@@ -13,24 +13,26 @@ namespace ProjectBlokH.Controllers
     public class UpdateController : ApiController
     {
         IApplicationRepository db;
-         
-        public UpdateController(IApplicationRepository db)
-        {
-            this.db = db;
-        }
-
-        public UpdateController()
-        {
-            db = new ApplicationUpdateRepository();
-        }
+        IApplicationRepository db2;
 
         [HttpPost]
         [Route("api/users/reservations/edit")]
-        public IEnumerable<Restaurant> PutReservation([FromBody] Reservation reservation)
+        public IHttpActionResult PutReservation([FromBody] Reservation reservation)
         {
+            db = new ApplicationUpdateRepository();
+
             db.UpdateReservation(reservation);
 
-            return db.GetAllRestaurants();
+            return StatusCode(HttpStatusCode.NoContent);
+        }
+
+        [HttpGet]
+        [Route("api/users/reservations/edit")]
+        public IEnumerable<Restaurant> GetRestaurants([FromBody] Reservation reservation)
+        {
+            db2 = new ApplicationReadRepository();
+
+            return db2.GetAllRestaurants();
         }
 
         public IHttpActionResult PutUser(int id, User user)

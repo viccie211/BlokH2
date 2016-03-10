@@ -110,7 +110,7 @@ namespace ProjectBlokH.Models
         }
         public IEnumerable<Restaurant> GetAllRestaurants()
         {
-            throw new NotImplementedException();
+            return restaurants;
         }
 
         public IEnumerable<User> GetAllUsers()

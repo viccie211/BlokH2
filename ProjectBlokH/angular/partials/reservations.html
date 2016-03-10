@@ -2,8 +2,8 @@
 <div class="col-xs-12 col-sm-4 col-md-4">
     Mijn reserveringen
     <ul class="list-group">
-        <li class="list-group-item" ng-repeat="reservation in reservations">{{reservation.Restaurant.Name}}, op {{reservation.Date}} om {{reservation.Time}}
-          <button ng-click="goEdit('/edit',reservation.Restaurant.Name, reservation.Id, reservation.Time)">Wijzig reservering</button>
+       <li class="list-group-item" ng-repeat="reservation in reservations">{{reservation.rest.Name}}, op {{reservation.reserv.Date}} om {{reservation.reserv.Time}}
+          <button ng-click="goEdit('/edit',reservation.rest.Name, reservation.reserv.id, reservation.reserv.Full)">Wijzig reservering</button>
         </li>
     </ul>
     </div>
