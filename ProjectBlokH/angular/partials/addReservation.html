@@ -1,13 +1,9 @@
 <div class="col-xs-0 col-sm-4 col-md-4"></div>
 <div class="col-xs-12 col-sm-4 col-md-4">
-		<select ng-model="selectedRestaurant" ng-options="item.Id as item.Name for item in Restaurants">
-			<option value="">Selecteer Restaurant</option>
-		</select>
+		<select ng-model="selectedRestaurant" ng-options="item.name for item in Restaurants"></select>
 		<br>
-		<input type="date" name="date">
-		<br>
-		<input type="time" name="time">
-		<br>
-		<button ng-click="addReservation()" value="AddReservation" class="btn btn-primary">Submit</button>
+		<input type="datetime-local" id="dateInput" name="input" ng-model="date.value"
+       placeholder="yyyy-MM-ddTHH:mm:ss" min="2016-01-01" max="2020-12-31" required />
+		<button ng-click="addReservation(date.value)" value="AddReservation" class="btn btn-primary">Submit</button>
 </div>
 <div class="col-xs-0 col-sm-4 col-md-4"></div>

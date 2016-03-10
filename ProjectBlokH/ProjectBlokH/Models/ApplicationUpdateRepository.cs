@@ -16,7 +16,11 @@ namespace ProjectBlokH.Models
 
         }
 
-        public Reservation AddReservation(Reservation reservation)
+        public IEnumerable<ReservationRestaurant> GetAllReservationsFromUser(int userId)
+        {
+            throw new NotImplementedException();
+        }
+        public int AddReservation(Reservation reservation)
         {
             throw new NotImplementedException();
         }
@@ -34,11 +38,6 @@ namespace ProjectBlokH.Models
         public IEnumerable<Reservation> GetAllReservations()
         {
             return reservations;
-        }
-
-        public IEnumerable<Reservation> GetAllReservationsFromUser(int userId)
-        {
-            throw new NotImplementedException();
         }
 
         public IEnumerable<Restaurant> GetAllRestaurants()
@@ -95,8 +94,8 @@ namespace ProjectBlokH.Models
 
             Reservation oldReservation = reservations.FirstOrDefault(r => r.id == reservation.id);
             oldReservation.Date = reservation.Date;
-            oldReservation.Restaurant = reservation.Restaurant;
-            oldReservation.User = reservation.User;
+            oldReservation.RestaurantId = reservation.RestaurantId;
+            oldReservation.UserId = reservation.UserId;
         }
 
         public void UpdateRestaurant(Restaurant restaurant)

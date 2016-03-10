@@ -4,12 +4,12 @@ using System.Linq;
 using System.Web;
 using System.Data.SqlClient;
 using System.Windows.Forms;
+using ProjectBlokH.Models;
 
 namespace ProjectBlokH.Models
 {
     public class ApplicationReadRepository : IApplicationRepository
     {
-
         SqlConnection db = new SqlConnection("Server=KOEN1\\SQLEXPRESS; Database=ProjectBlokH; Integrated Security=True;");
         List<Reservation> reservations;
         List<User> users;
@@ -161,7 +161,7 @@ namespace ProjectBlokH.Models
         }
         public IEnumerable<Restaurant> GetAllRestaurants()
         {
-            throw new NotImplementedException();
+            return restaurants;
         }
 
         public IEnumerable<User> GetAllUsers()

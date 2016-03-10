@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Cors;
 using ProjectBlokH.Models;
+using System.Web.Http.Cors;
 
 namespace ProjectBlokH.Controllers
 {
@@ -23,6 +24,13 @@ namespace ProjectBlokH.Controllers
         {
             IApplicationRepository repo = new ApplicationReadRepository();
             return repo.AddReservation(res);
+        }
+
+        public bool DeleteReservation(int Id)
+        {
+            IApplicationRepository data = new ApplicationDeleteRepository();
+            data.RemoveReservation(Id);
+            return true;
         }
     }
 }

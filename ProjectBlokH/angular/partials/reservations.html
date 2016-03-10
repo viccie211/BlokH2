@@ -2,7 +2,7 @@
 <div class="col-xs-12 col-sm-4 col-md-4">
     Mijn reserveringen
     <ul class="list-group">
-        <li class="list-group-item" ng-repeat="reservation in reservations">{{reservation.rest.Name}}, op {{reservation.reserv.Date}} om {{reservation.reserv.Time}}</li>
+        <li class="list-group-item" ng-repeat="reservation in reservations">{{reservation.rest.Name}}, op {{reservation.reserv.DateShow}} om {{reservation.reserv.Time}}<button value="delete" ng-click="Delete(reservation.reserv.id)">Delete</button></li>
     </ul>
 	<button ng-click="createReservation()" value="CreateReservation" class="btn btn-primary">+ Voeg toe</button>
 </div>
