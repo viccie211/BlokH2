@@ -94,9 +94,64 @@ reservationsControllers.controller('ReservationsCtrl', ['$scope', '$http', '$loc
             $scope.reservations[0] = {};
             $scope.reservations[0].restaurant = {};
             $scope.reservations[0].restaurant.Name = "Loading";
+
+
+
+            $scope.goEdit = function(path, name, id, date, time){
+
+                var restaurantName = name;
+                var date = date;
+                var restaurantId = id;
+
+                editService.setRestaurant(restaurantName, restaurantId, date);
+
+                $location.path(path);
+
+            };
         }
         else {
             $location.path('/login');
         }
     }
+
 ]);
+reservationsControllers.controller('EditCtrl', ['$scope', '$http', '$location','loginService', 'editService',
+    function($scope, $http, $location, loginService, editService){
+        if(loginService.getLoggedIn()!=-1)
+        {
+            $http({
+                method: 'GET',
+                url: 'http://localhost:59499/api/users/reservations/edit'
+            }).then(function successCallback(response){
+                if(response.data !=-1){
+                    $scope.restaurants = response.data;
+                }else{
+                    $location.path('/reservations');
+                }
+            },function errorCallback(response){
+
+            });
+
+
+            $scope.edit = function () {
+                var date = $scope.restaurantDate;
+                $http({
+                    method: 'POST',
+                    url: 'http://localhost:59499/api/users/reservations/edit',
+                    data: {"id": editService.getRestaurantId(), "Date": date, "RestaurantId": $scope.restaurant, "userId": loginService.getLoggedIn()}
+                }).then(function successCallback(response) {
+                    if (response.data != -1) {
+                        $location.path('/reservations');
+                    }
+                }, function errorCallback(response) {
+                    // called asynchronously if an error occurs
+                    // or server returns response with an error status.
+                });
+                $scope.userId = "Loading";
+            }
+            $scope.restaurantDate = editService.getRestaurantDate();
+        }else{
+            $location.path('/login');
+        }
+    }]);
+

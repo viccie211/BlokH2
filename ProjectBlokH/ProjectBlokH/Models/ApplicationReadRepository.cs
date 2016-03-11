@@ -8,7 +8,7 @@ namespace ProjectBlokH.Models
 {
     public class ApplicationReadRepository : IApplicationRepository
     {
-        SqlConnection db = new SqlConnection("Server= DESKTOP-SKEMNB8\\SQLEXPRESS; Database= ProjectBlokH; Integrated Security=True;");
+        SqlConnection db = new SqlConnection("Server= localhost; Database= ProjectBlokH; Integrated Security=True;");
         List<Reservation> reservations;
         List<User> users;
         List<Restaurant> restaurants;
@@ -115,6 +115,8 @@ namespace ProjectBlokH.Models
 
         public IEnumerable<User> GetAllUsers()
         {
+            SqlConnection db = new SqlConnection("Server= localhost; Database= ProjectBlokH; Integrated Security=True;");
+
             SqlCommand cmd = new SqlCommand();
             cmd.CommandText = "SELECT * FROM [ProjectBlokH].[dbo].[users] u;";
             cmd.Connection = db;
@@ -169,17 +171,17 @@ namespace ProjectBlokH.Models
             throw new NotImplementedException();
         }
 
-        public bool UpdateReservation(Reservation reservation)
+        public void UpdateReservation(Reservation reservation)
         {
             throw new NotImplementedException();
         }
 
-        public bool UpdateRestaurant(Restaurant restaurant)
+        public void UpdateRestaurant(Restaurant restaurant)
         {
             throw new NotImplementedException();
         }
 
-        public bool UpdateUser(User user)
+        public void UpdateUser(User user)
         {
             throw new NotImplementedException();
         }

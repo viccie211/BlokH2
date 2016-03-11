@@ -9,7 +9,7 @@ namespace ProjectBlokH.Models
     public class ApplicationDeleteRepository
         : IApplicationRepository
     {
-        SqlConnection db = new SqlConnection("Server= DESKTOP-SKEMNB8\\SQLEXPRESS; Database= ProjectBlokH; Integrated Security=True;");
+        SqlConnection db = new SqlConnection("Server= localhost; Database= ProjectBlokH; Integrated Security=True;");
 
         public Reservation AddReservation(Reservation reservation)
         {
@@ -102,17 +102,17 @@ namespace ProjectBlokH.Models
             db.Close();
         }
 
-        public bool UpdateReservation(Reservation reservation)
+        public void UpdateReservation(Reservation reservation)
         {
             throw new NotImplementedException();
         }
 
-        public bool UpdateRestaurant(Restaurant restaurant)
+        public void UpdateRestaurant(Restaurant restaurant)
         {
             throw new NotImplementedException();
         }
 
-        public bool UpdateUser(User user)
+        public void UpdateUser(User user)
         {
             throw new NotImplementedException();
         }

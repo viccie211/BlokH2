@@ -18,6 +18,9 @@ reservationsApp.config(['$routeProvider',
             when('/reservations', {
                 templateUrl: 'partials/reservations.html',
                 controller: 'ReservationsCtrl'
+            }).when('/edit', {
+            templateUrl: 'partials/updateReservation.html',
+            controller: 'EditCtrl'
             }).
 			otherwise({
                 redirectTo: '/login'

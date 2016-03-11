@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 
@@ -7,13 +8,14 @@ namespace ProjectBlokH.Models
 {
     public class ApplicationUpdateRepository : IApplicationRepository
     {
-        private List<Reservation> reservations = new List<Reservation>();
+        private IEnumerable<Reservation> reservations = new List<Reservation>();
         private List<Restaurant> restaurants = new List<Restaurant>();
         private List<User> users = new List<User>();
 
         public ApplicationUpdateRepository()
         {
-
+            ApplicationReadRepository db = new ApplicationReadRepository();
+            reservations = db.GetAllReservations();
         }
 
         public IEnumerable<ReservationRestaurant> GetAllReservationsFromUser(int userId)
@@ -96,6 +98,9 @@ namespace ProjectBlokH.Models
             oldReservation.Date = reservation.Date;
             oldReservation.RestaurantId = reservation.RestaurantId;
             oldReservation.UserId = reservation.UserId;
+
+            update(oldReservation);
+
         }
 
         public void UpdateRestaurant(Restaurant restaurant)
@@ -121,17 +126,19 @@ namespace ProjectBlokH.Models
             oldUser.Password = user.Password;
         }
 
-        bool IApplicationRepository.UpdateReservation(Reservation reservation)
+        private void update(Reservation reservation)
         {
-            throw new NotImplementedException();
+            SqlConnection conn = new SqlConnection("Server= localhost; Database= ProjectBlokH; Integrated Security=True;");
+            SqlCommand cmd = new SqlCommand();
+            cmd.Connection = conn;
+            conn.Open();
+            cmd.CommandText = "UPDATE [ProjectBlokH].[dbo].[reservation] SET moment ='" + reservation.Date + "',restaurant=" + reservation.RestaurantId + ", userId=" + reservation.UserId + "WHERE id =" + reservation.id + ";";
+            int i = 1;
+            cmd.ExecuteNonQuery();
+            conn.Close();
         }
 
-        bool IApplicationRepository.UpdateRestaurant(Restaurant restaurant)
-        {
-            throw new NotImplementedException();
-        }
-
-        bool IApplicationRepository.UpdateUser(User user)
+        IEnumerable<ReservationRestaurant> IApplicationRepository.GetAllReservationsFromUser(int userId)
         {
             throw new NotImplementedException();
         }
